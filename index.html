@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pierożkowy Raj | Domowe jedzenie w Poznaniu</title>
+    <style>
+        /* Stylistyka: Apetyczna, Rustykalna, Domowa */
+        :root {
+            --bg-color: #fdf8f5; /* Ciepły, śmietankowy krem */
+            --text-main: #3e2723; /* Ciemny, czekoladowy brąz */
+            --primary: #c62828; /* Głęboka, apetyczna czerwień */
+            --primary-hover: #b71c1c;
+            --accent: #f57f17; /* Złoty / musztardowy (jak podsmażona cebulka) */
+            --white: #ffffff;
+            --shadow: 0 8px 25px rgba(62, 39, 35, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3, h4, .logo { font-family: 'Georgia', serif; } /* Klasyczna, tradycyjna czcionka do nagłówków */
+        
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+        /* Nawigacja */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 5vw; background: rgba(253, 248, 245, 0.95); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05); backdrop-filter: blur(5px); }
+        .logo { font-size: 26px; font-weight: bold; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        .logo span { color: var(--text-main); }
+        
+        nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+        nav ul li a { text-decoration: none; color: var(--text-main); font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        nav ul li a:hover { color: var(--primary); }
+
+        .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 101; }
+        .hamburger span { width: 30px; height: 3px; background-color: var(--text-main); transition: 0.3s; border-radius: 2px; }
+        .mobile-only { display: none; }
+
+        /* Przyciski */
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 30px; background-color: var(--primary); color: var(--white) !important; text-decoration: none; font-size: 15px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 50px; transition: 0.3s; border: 2px solid var(--primary); }
+        .btn:hover { background-color: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(198, 40, 40, 0.3); }
+        .btn-outline { background-color: transparent; color: var(--primary) !important; }
+        .btn-outline:hover { background-color: var(--primary); color: var(--white) !important; }
+
+        /* Hero */
+        .hero { 
+            height: 85vh; 
+            display: flex; 
+            align-items: center; 
+            padding-left: 5vw;
+            /* Zmiana tła na apetyczne, rustykalne zdjęcie pierogów/jedzenia */
+            background: linear-gradient(90deg, rgba(253, 248, 245, 0.95) 0%, rgba(253, 248, 245, 0.7) 60%, rgba(253, 248, 245, 0.1) 100%), 
+                        url('https://images.unsplash.com/photo-1662116663511-9d79d49da183?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover; 
+        }
+        .hero-content { max-width: 600px; }
+        .hero-badge { background: var(--accent); color: var(--text-main); padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 14px; text-transform: uppercase; margin-bottom: 20px; display: inline-block; letter-spacing: 1px; }
+        .hero-content h1 { font-size: 55px; color: var(--text-main); margin-bottom: 20px; line-height: 1.1; }
+        .hero-content h1 span { color: var(--primary); font-style: italic; }
+        .hero-content p { font-size: 18px; color: #5d4037; margin-bottom: 40px; font-weight: 500; }
+
+        /* Sekcje */
+        section { padding: 90px 5vw; max-width: 1200px; margin: 0 auto; }
+        h2 { font-size: 40px; text-align: center; margin-bottom: 20px; color: var(--text-main); }
+        h2 span { color: var(--primary); font-style: italic; }
+        .section-subtitle { text-align: center; color: #795548; margin-bottom: 60px; font-size: 17px; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+        /* Polecane Menu */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .menu-card { background: var(--white); padding: 30px; border-radius: 12px; box-shadow: var(--shadow); text-align: center; border-bottom: 4px solid var(--accent); transition: 0.3s; }
+        .menu-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .menu-icon { font-size: 45px; margin-bottom: 15px; }
+        .menu-card h4 { font-size: 22px; margin-bottom: 10px; color: var(--text-main); }
+        .menu-card p { font-size: 15px; color: #6d4c41; margin-bottom: 15px; }
+        .price-tag { font-weight: bold; color: var(--primary); font-size: 18px; background: #ffebee; padding: 5px 15px; border-radius: 20px; display: inline-block; }
+
+        /* Opinie */
+        .reviews-section { background-color: #fff3e0; border-radius: 30px; padding: 80px 5vw; margin: 40px 5vw; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; }
+        .review-card { background: var(--white); padding: 40px; border-radius: 12px; position: relative; box-shadow: var(--shadow); }
+        .stars { color: #fbc02d; font-size: 20px; margin-bottom: 15px; letter-spacing: 2px; }
+        .review-text { font-style: italic; color: #5d4037; margin-bottom: 20px; font-size: 16px; line-height: 1.7; }
+        .review-author { font-weight: bold; text-transform: uppercase; font-size: 14px; color: var(--primary); }
+
+        /* Stopka */
+        footer { background: var(--text-main); color: #efebe9; padding: 70px 5vw 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .footer-col h4 { font-size: 22px; margin-bottom: 25px; color: var(--accent); }
+        .footer-col p { margin-bottom: 12px; font-size: 15px; }
+        .footer-col a { color: var(--white); text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .footer-col a:hover { color: var(--accent); }
+        
+        .fb-btn { display: inline-flex; align-items: center; gap: 10px; background: #1877F2; padding: 10px 20px; border-radius: 8px; color: white !important; font-weight: bold; margin-top: 10px; }
+        .fb-btn svg { width: 20px; height: 20px; fill: white; }
+        .fb-btn:hover { background: #166fe5; color: white !important; }
+
+        .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 50px; padding-top: 25px; font-size: 13px; color: #8d6e63; }
+
+        /* Wersja Mobilna */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            nav ul { position: fixed; top: 0; right: -100%; width: 85%; height: 100vh; background: var(--bg-color); flex-direction: column; justify-content: center; transition: 0.4s ease; box-shadow: -5px 0 20px rgba(0,0,0,0.1); }
+            nav ul.active { right: 0; }
+            .mobile-only { display: block; }
+            
+            .hero { padding-right: 5vw; background: linear-gradient(rgba(253, 248, 245, 0.95), rgba(253, 248, 245, 0.85)), url('https://images.unsplash.com/photo-1628205465220-43187c5388db?q=80&w=2000') center/cover; }
+            .hero-content h1 { font-size: 42px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Pierożkowy <span>Raj</span></div>
+        <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+        <ul id="navMenu">
+            <li><a href="#menu" onclick="toggleMenu()">Menu</a></li>
+            <li><a href="#opinie" onclick="toggleMenu()">Opinie</a></li>
+            <li><a href="#kontakt" onclick="toggleMenu()">Kontakt i Dowóz</a></li>
+            <li class="mobile-only"><a href="tel:537287501" class="btn">📞 Zadzwoń: 537 287 501</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Kuchnia Polska i Ukraińska</div>
+            <h1>Prawdziwy smak <br><span>domowego obiadu.</span></h1>
+            <p>Ręcznie lepione pierogi, tradycyjne pielmieni, domowe zupy i włoskie pasty. Przyjdź i poczuj się jak u mamy w sercu Poznania.</p>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <a href="tel:537287501" class="btn">📞 Zamów na wynos</a>
+                <a href="#menu" class="btn btn-outline">Zobacz nasze dania</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="menu">
+        <h2>Nasze <span>Przysmaki</span></h2>
+        <p class="section-subtitle">Wszystko przygotowujemy ze świeżych składników, według tradycyjnych przepisów. Bez półśrodków, z pełnym sercem.</p>
+        
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="menu-icon">🥟</div>
+                <h4>Pierogi</h4>
+                <p>Klasyka, która nigdy się nie nudzi. Ręcznie lepione pierogi z mięsem, podsmażane ze złocistą cebulką. Tradycyjne ukraińskie pielmieni oraz chrupiące czebureki.</p>
+            </div>
+            <div class="menu-card">
+                <div class="menu-icon">🍲</div>
+                <h4>Domowe Zupy</h4>
+                <p>Gorące, rozgrzewające i pełne smaku. Prawdziwy hit to nasza pyszna zupa grzybowa gotowana na prawdziwkach, która smakuje jak u babci.</p>
+                <div class="price-tag">od 12,00 zł</div>
+            </div>
+            <div class="menu-card">
+                <div class="menu-icon">🍝</div>
+                <h4>Pasty & Naleśniki</h4>
+                <p>Mamy coś dla fanów innej kuchni! Idealne porcje pysznego, aromatycznego spaghetti bolognese oraz słodkie i wytrawne naleśniki.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="reviews-section" id="opinie">
+        <h2>Co mówią <span>nasi Goście?</span></h2>
+        <p class="section-subtitle">Średnia ocen 4.9 ⭐ na podstawie dziesiątek opinii w Google. Wasz uśmiech po zjedzonym posiłku to dla nas największa nagroda.</p>
+        
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Wpadłam na szybką pastę i... zakochałam się w bolognese! ❤️ Porcja idealna, smak genialny, a klimat miejsca bardzo przyjemny. Czasem człowiek po prostu potrzebuje dobrego jedzenia – i to był strzał w dziesiątkę! Polecam z całego serca! 🍝🥰"</p>
+                <div class="review-author">— Little Angel</div>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Pyszna zupka grzybowa z prawdziwkami za 12 zł, do tego pierożki z mięsem i cebulką smażoną. Wszystkie te aspekty sprawiły, że naprawdę poczułam się jakbym była na obiadku w domu."</p>
+                <div class="review-author">— Konrad B. / Opinie Google</div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="kontakt">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Pierożkowy Raj</h4>
+                <p>Twoje ulubione miejsce na domowy obiad w Poznaniu. Serwujemy polską i ukraińską kuchnię tworzoną z sercem.</p>
+                
+                <a href="https://www.facebook.com/share/1BBcL5Aqr1/?mibextid=wwXIfr" target="_blank" class="fb-btn">
+                    <svg viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+                    Nasz Facebook
+                </a>
+            </div>
+            <div class="footer-col">
+                <h4>Zamówienia i Rezerwacje</h4>
+                <p>Zadzwoń do nas i odbierz gorące jedzenie na miejscu!</p>
+                <p style="margin-top: 15px; font-size: 24px; font-weight: bold; color: var(--accent);">
+                    <a href="tel:537287501" style="color: var(--accent);">537 287 501</a>
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Informacje</h4>
+                <p>📍 <strong>Adres:</strong><br> os. Jagiellońskie 130B<br> 61-223 Poznań</p>
+                <p style="margin-top: 15px;">🕒 <strong>Godziny otwarcia:</strong><br> Codziennie do 20:00</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Pierożkowy Raj Poznań. Projekt i wykonanie: [Twoje Imię/Nazwa]</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
