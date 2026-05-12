@@ -98,17 +98,11 @@
         /* Wersja Mobilna */
         @media (max-width: 768px) {
             .hamburger { display: flex; }
-            nav ul { position: fixed; top: 0; right: -100%; /* ... itd ... */ }
+            nav ul { position: fixed; top: 0; right: -100%; width: 85%; height: 100vh; background: var(--bg-color); flex-direction: column; justify-content: center; transition: 0.4s ease; box-shadow: -5px 0 20px rgba(0,0,0,0.1); }
             nav ul.active { right: 0; }
             .mobile-only { display: block; }
             
-            /* TUTAJ ZMIEŃ LINK NA TEN SAM, CO NA GÓRZE KODU */
-            .hero { 
-                padding-right: 5vw; 
-                background: linear-gradient(rgba(253, 248, 245, 0.95), rgba(253, 248, 245, 0.85)), 
-                            url('TUTAJ_WKLEJ_SWÓJ_NOWY_LINK_DO_PIEROGÓW') center/cover; 
-            }
-            
+            .hero { padding-right: 5vw; background: linear-gradient(rgba(253, 248, 245, 0.95), rgba(253, 248, 245, 0.85)), url('https://images.unsplash.com/photo-1662116663511-9d79d49da183?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover; }
             .hero-content h1 { font-size: 42px; }
         }
     </style>
@@ -145,7 +139,7 @@
         <div class="menu-grid">
             <div class="menu-card">
                 <div class="menu-icon">🥟</div>
-                <h4>Pierogi</h4>
+                <h4>Pierogi & Pielmieni</h4>
                 <p>Klasyka, która nigdy się nie nudzi. Ręcznie lepione pierogi z mięsem, podsmażane ze złocistą cebulką. Tradycyjne ukraińskie pielmieni oraz chrupiące czebureki.</p>
             </div>
             <div class="menu-card">
